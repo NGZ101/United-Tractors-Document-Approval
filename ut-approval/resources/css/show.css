@@ -1,0 +1,62 @@
+/* ================= RESET ================= */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background-color: #e6e6e6;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+    position: relative;
+    background-color: #EAB514;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 0;
+}
+
+.back-btn {
+    position: absolute;
+    left: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.back-btn img {
+    width: 38px;
+    height: 38px;
+}
+
+.logo img {
+    height: 65px;
+    width: auto;
+}
+
+/* ================= DOCUMENT CONTAINER ================= */
+.doc-container {
+    max-width: 550px;
+    margin: 70px auto;
+    background-color: #f5f5f5;
+    padding: 40px 25px;
+    border-radius: 14px;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.doc-item {
+    height: 100%;            
+    width: auto;                  
+    background-color: #d6cfd1; 
+    border: none;            
+    border-radius: 8px;       
+    color: black;             
+    margin: 20px 5px;
+    padding: 12px 15px;
+    font-size: large;
+    text-align: left;
+}
