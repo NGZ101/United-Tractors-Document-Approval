@@ -43,6 +43,7 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     flex-direction: column;
     padding: 10px;
+    cursor:pointer;
 }
 
 .dropdown-item{
@@ -55,6 +56,7 @@ body {
     margin: 3px;
     text-decoration:none;
     color:black;
+    cursor:pointer;
 }
 
 .popup-container {
@@ -86,7 +88,8 @@ body {
     border-radius: 4px;
     padding: 5px 25px;
     color: black;
-    text-decoration: none
+    text-decoration: none;
+    cursor:pointer;
 }
 
 .no-btn {
@@ -94,25 +97,30 @@ body {
     border-radius: 4px;
     padding: 5px 25px;
     color: black;
-    text-decoration: none
+    text-decoration: none;
+    cursor:pointer;
 }
 
 /* ================= TABLE ================= */
 
 .table-container {
-    max-width: 690px;
-    margin: 10px auto;
-    padding: 0 20px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0;
 }
 
 .above-table {
+    max-width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    padding: 0 30px;
+    margin-top: 5px;
 }
 
 .link-box{
+    max-width: 100%;
     display:flex;
     justify-content:space-between;
 }
@@ -120,8 +128,7 @@ body {
 .link-box a{
     text-decoration:none;
     color:#333;
-    margin-top:-5px;
-    margin-bottom:1px;
+    margin: 0;
 }
 
 .link-box a:hover{
@@ -155,14 +162,19 @@ body {
 
 .table-dashboard {
     max-width: 100%;
-    margin: 10px auto;
+    width: 100%;
+    margin: 0;
     background-color: #f5f5f5;
-    padding: 40px 45px;
+    padding: 20px 30px;
     border-radius: 14px;
     box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
     text-align: center;
     border-collapse: separate;
-    border-spacing: 15px;
+    border-spacing: 10px 10px;
+}
+
+.table-dashboard, .table-dashboard tbody, .table-dashboard tr, .table-dashboard td {
+    overflow: visible;
 }
 
 .tanggal, .judul, .status, .actions {
@@ -170,6 +182,22 @@ body {
     background-color:#EAB514;
     border-radius: 4px;
     align-items: center;
+}
+
+.table-items td {
+    background-color: #cccccc;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+.table-items td:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.table-items td:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
 /* ================= BUTTONS ================= */
@@ -208,3 +236,97 @@ body {
     object-fit: contain;
     padding-top: 5px;
 }
+
+/* --- HOVER POPUP STATUS TIMELINE --- */
+/* 1. Pembungkus teks utama ("Approved", "Rejected", dll) */
+.hover-status {
+    position: relative;
+    display: inline-block;
+    cursor: help; /* Mengubah kursor jadi tanda tanya/help saat di-hover */
+    z-index: 100;
+}
+
+/* 2. Kotak Popup (Disembunyikan secara default) */
+.status-timeline {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    bottom: calc(100% + 10px); /* Muncul di atas teks agar tidak tertutup batas bawah tabel */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #e5e7eb; /* Warna abu-abu terang sesuai mockup */
+    padding: 15px 20px;
+    border-radius: 8px;
+    width: max-content;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    text-align: left;
+    color: #1f2937;
+}
+
+/* Memunculkan popup saat teks status di-hover */
+.hover-status:hover .status-timeline {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Segitiga kecil (ekor popup) yang menunjuk ke teks */
+.status-timeline::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -8px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: #e5e7eb transparent transparent transparent;
+}
+
+/* 3. Daftar vertikal timeline */
+.timeline-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+}
+
+/* Garis vertikal abu-abu penyambung antar titik */
+.timeline-list::before {
+    content: '';
+    position: absolute;
+    left: 5px; /* Menyesuaikan agar pas di tengah titik */
+    top: 5px;
+    bottom: 5px;
+    width: 2px;
+    background-color: #9ca3af;
+    z-index: 0;
+}
+
+/* 4. Teks masing-masing tahap (Dept Head, Div Head, dll) */
+.timeline-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    z-index: 1;
+}
+
+.timeline-item span {
+    font-weight: normal;
+}
+
+/* 5. Titik (Dot) warna-warni */
+.timeline-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0; /* Agar lingkaran tidak gepeng kalau teksnya panjang */
+    box-shadow: 0 0 0 2px #e5e7eb; /* Memberi efek batas putih/abu agar garis vertikal terpotong rapi */
+}
+
+/* Definisi Warna Titik */
+.dot-green { background-color: #22c55e; } /* Hijau */
+.dot-red { background-color: #ef4444; }   /* Merah */
+.dot-yellow { background-color: #eab308; } /* Kuning */
+.dot-black { background-color: #6b7280; }  /* Abu-abu gelap (untuk status Pending/Canceled) */

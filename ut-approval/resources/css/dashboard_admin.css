@@ -1,0 +1,340 @@
+/* ================= RESET ================= */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background-color: #e6e6e6;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+    position: relative;
+    background-color: #EAB514;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 0;
+}
+
+.profile {
+    position: absolute;
+    right: 25px;
+    top: 20px;
+    border: none;
+    background: transparent;
+    cursor:pointer;
+}
+
+.profile-img {
+    width: 50px;
+    display: block;
+}
+
+.dropdown-profile {
+    position: absolute;
+    top: 38px;
+    right: 83px;
+    display: flex;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    padding: 10px;
+}
+
+.dropdown-item{
+    width: auto;
+    padding: 10px 8px;
+    gap: 10px;
+    font-size: 14px;
+    background-color: #EAB514;
+    border-radius: 4px;
+    margin: 3px;
+    text-decoration:none;
+    color:black;
+}
+
+.popup-container {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    background-color: #e6e6e6;
+    width: max-content;
+    height: max-content;
+    padding: 25px 20px;
+    gap: 10px;
+    border-radius: 4px;
+}
+
+.popup-btns {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.yes-btn {
+    background-color: green;
+    border-radius: 4px;
+    padding: 5px 25px;
+    color: black;
+    text-decoration: none
+}
+
+.no-btn {
+    background-color: red;
+    border-radius: 4px;
+    padding: 5px 25px;
+    color: black;
+    text-decoration: none
+}
+
+/* ================= TABLE ================= */
+
+.table-title {
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.table-container-admin {
+    width: 95%;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.above-table {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.link-box{
+    display:flex;
+    justify-content:space-between;
+}
+
+.link-box a{
+    text-decoration:none;
+    color:#333;
+    margin-top:-5px;
+    margin-bottom:1px;
+}
+
+.link-box a:hover{
+    color:#187b92;
+}
+
+.submit-btn {
+    display: flex;
+    justify-content: space-between;
+    background-color:#2c88ab;
+    border-radius: 4px;
+    align-items:center;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-decoration:none;
+    color:black;
+}
+
+.submit-btn img {
+    margin-right: 10px;
+    width: 30px;
+}
+
+.above-table h1 {
+    font-size:50px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.table-dashboard-admin {
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+    table-layout: auto;
+    background-color: #f5f5f5;
+    padding: 20px 30px;
+    border-radius: 14px;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    border-collapse: separate;
+    border-spacing: 10px 10px;
+}
+
+.table-dashboard-admin, .table-dashboard-admin tbody, .table-dashboard-admin tr, .table-dashboard-admin td {
+    overflow: visible;
+
+}
+
+.id, .role, .divisi, .email, .actions {
+    padding:12px 15px;
+    background-color:#EAB514;
+    border-radius: 4px;
+    align-items: center;
+}
+
+.ids, .tanggal, .judul, .status, .actions {
+    padding:12px 15px;
+    background-color:#EAB514;
+    border-radius: 4px;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.table-items td {
+    background-color: #b3b3b3;
+    padding: 12px 25px;
+    text-align: center;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.table-items td:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.table-items td:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+/* ================= BUTTONS ================= */
+
+.action-btns- {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.view-btn {
+    background-color: grey;
+    border-radius: 4px;
+    padding: 6px;
+    align-items: center;
+}
+
+.download-btn {
+    background-color: #4CAF50;
+    border-radius: 4px;
+    padding: 6px;
+    align-items: center;
+}
+
+.retry-btn {
+    background-color: red;
+    border-radius: 4px;
+    padding: 6px;
+    align-items: center;
+}
+
+.btn-icon {
+    height: 25px;
+    width: 25px;
+    object-fit: contain;
+    padding-top: 5px;
+}
+
+.hover-status {
+    position: relative;
+    display: inline-block;
+    cursor: help; /* Mengubah kursor jadi tanda tanya/help saat di-hover */
+}
+
+/* 2. Kotak Popup (Disembunyikan secara default) */
+.status-timeline {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    bottom: 130%; /* Muncul di atas teks agar tidak tertutup batas bawah tabel */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #e5e7eb; /* Warna abu-abu terang sesuai mockup */
+    padding: 15px 20px;
+    border-radius: 8px;
+    width: max-content;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    text-align: left;
+    color: #1f2937;
+}
+
+/* Memunculkan popup saat teks status di-hover */
+.hover-status:hover .status-timeline {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Segitiga kecil (ekor popup) yang menunjuk ke teks */
+.status-timeline::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -8px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: #e5e7eb transparent transparent transparent;
+}
+
+/* 3. Daftar vertikal timeline */
+.timeline-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+}
+
+/* Garis vertikal abu-abu penyambung antar titik */
+.timeline-list::before {
+    content: '';
+    position: absolute;
+    left: 5px; /* Menyesuaikan agar pas di tengah titik */
+    top: 5px;
+    bottom: 5px;
+    width: 2px;
+    background-color: #9ca3af;
+    z-index: 0;
+}
+
+/* 4. Teks masing-masing tahap (Dept Head, Div Head, dll) */
+.timeline-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    z-index: 1;
+}
+
+.timeline-item span {
+    font-weight: normal;
+}
+
+/* 5. Titik (Dot) warna-warni */
+.timeline-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0; /* Agar lingkaran tidak gepeng kalau teksnya panjang */
+    box-shadow: 0 0 0 2px #e5e7eb; /* Memberi efek batas putih/abu agar garis vertikal terpotong rapi */
+}
+
+/* Definisi Warna Titik */
+.dot-green { background-color: #22c55e; } /* Hijau */
+.dot-red { background-color: #ef4444; }   /* Merah */
+.dot-yellow { background-color: #eab308; } /* Kuning */
+.dot-black { background-color: #6b7280; }  /* Abu-abu gelap (untuk status Pending/Canceled) */

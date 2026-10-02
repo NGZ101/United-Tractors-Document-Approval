@@ -17,6 +17,9 @@ class UserController extends Controller
             'email' => 'required|string|email|max:100|unique:users',
             'username' => 'required|string|max:100|unique:users',
             'password' => 'required|string|min:8|confirmed',
+        ], [
+            'email.unique' => 'Maaf, email ini sudah terdaftar',
+            'username.unique' => 'Maaf, username ini sudah terdaftar',
         ]);
 
         $user = User::create([
@@ -39,7 +42,7 @@ class UserController extends Controller
 
         if(Auth::attempt($credentials)) {
             return redirect()->route('dashboard');
-        }
+        } 
         return back()->withErrors([
             'username' => 'Username atau Password salah'
         ]);

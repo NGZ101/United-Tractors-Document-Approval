@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Head, Link, useForm, usePage } from "@inertiajs/react";
 import { router } from "@inertiajs/react";
-import "D:/06-Coding Naufal/United-Tractors-Document-Approval/ut-approval/resources/css/register.css";
+import "/resources/css/register.css";
 export default function Register() {
     const { data, setData, post, processing, errors } = useForm({
         nama_full: "",
@@ -14,7 +14,16 @@ export default function Register() {
     const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
     const submit = (e) => {
         e.preventDefault(); // Mencegah browser me-reload halaman
-        post("/register"); // Mengirim data ke route POST /login Laravel
+        post("/register", {
+            onError: (errors) => {
+                if (errors.email) {
+                    setData("email", ""); // Kosongkan field email jika ada error
+                }
+                if (errors.username) {
+                    setData("username", ""); // Kosongkan field username jika ada error
+                }
+            }
+        }); // Mengirim data ke route POST /login Laravel
     };
     return (
         <div>
@@ -47,29 +56,33 @@ export default function Register() {
                         <input
                             type="email"
                             name="Email"
-                            placeholder="Email"
                             required
                             value={data.email}
-                            onChange={(e) => setData("email", e.target.value)}
+                            onChange={(e) => {
+                                setData("email", e.target.value);
+                                clearErrors('email');
+                            }}
+                            placeholder={errors.email ? errors.email : "Email"}
                         />
                     </div>
                     <div className="input-group">
                         <input
                             type="text"
                             name="username"
-                            placeholder="Username"
                             required
                             value={data.username}
-                            onChange={(e) =>
-                                setData("username", e.target.value)
-                            }
+                            onChange={(e) => {
+                                setData("username", e.target.value);
+                                clearErrors('username');
+                            }}
+                            placeholder={errors.username ? errors.username : "Username"}
                         />
                     </div>
                     <div className="input-group">
                         <input
                             type={showPassword ? "text" : "password"}
                             name="password"
-                            placeholder="Password"
+                            placeholder="Password (Minimal 8 Karakter)"
                             required
                             value={data.password}
                             onChange={(e) =>
@@ -86,7 +99,7 @@ export default function Register() {
                         <input
                             type={showPasswordConfirm ? "text" : "password"}
                             name="password_confirmation"
-                            placeholder="Konfirmasi Password"
+                            placeholder="Konfirmasi Password (Minimal 8 Karakter)"
                             required
                             value={data.password_confirmation}
                             onChange={(e) =>

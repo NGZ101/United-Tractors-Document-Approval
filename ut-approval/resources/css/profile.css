@@ -53,26 +53,31 @@ body {
 }
 
 .info-item {
-    height: 100%;            
-    width: auto;                  
+    height: 50px;            
+    width: 100%;                  
     background-color: #d6cfd1; 
     border: none;            
     border-radius: 8px;       
     color: black;             
-    margin: 25px 5px;
-    padding: 12px 15px;
+    margin: 20px 0;
+    padding: 0 15px;
     font-size: large;
     text-align: left;
+    box-sizing: border-box;
+    align-items: center;
+    display: flex;
 }
 
 .edit-btn {
     color: black;
     background-color: #EAB514;
-    padding: 10px 10px;
-    border-radius: 4px;
-    margin: 30px 10px;
+    padding: 10px 0;
+    border-radius: 8px;
+    margin: 0 0;
+    height: 50px;            
     width: 100%;
     font-size: x-large;
     text-decoration: none;
-    margin-top: 10px;
+    display: block;
+    box-sizing: border-box;
 }

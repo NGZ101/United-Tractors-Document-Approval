@@ -49,14 +49,17 @@ body {
 }
 
 .doc-item {
-    height: 100%;            
-    width: auto;                  
+    height: 50px;            
+    width: 100%;                  
     background-color: #d6cfd1; 
     border: none;            
     border-radius: 8px;       
     color: black;             
-    margin: 20px 5px;
-    padding: 12px 15px;
+    margin: 20px 0;
+    padding: 0 15px;
     font-size: large;
     text-align: left;
+    box-sizing: border-box;
+    align-items: center;
+    display: flex;
 }

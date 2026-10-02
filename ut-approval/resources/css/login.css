@@ -8,21 +8,24 @@
 
 body{
     width:100%;
-    height:100vh;
-    overflow:hidden;
+    min-height:100vh;
+    overflow-x:hidden;
 }
 
 /* ================= MAIN CONTAINER ================= */
 .container{
     display:flex;
     width:100%;
-    height:100vh;
+    min-height:100vh;
 }
 
 /* ================= LEFT SIDE ================= */
 .left-side{
     width:58%;
-    background:#EAB514;
+    background-image: url('/assets/Office.jpeg');
+    background-repeat: no-repeat, no-repeat;
+    background-size: cover, cover;
+    background-blend-mode: multiply;
     position:relative;
     display:flex;
     justify-content:center;
@@ -31,9 +34,13 @@ body{
 
 /* logo */
 .logo-box{
+    background:#fff;
     display:flex;
     align-items:center;
     gap:20px;
+    padding: 20px;
+    border-radius:18px;
+    box-shadow:5px 5px 10px rgba(0,0,0,0.25);
 }
 
 .logo-box img{
@@ -195,39 +202,64 @@ body{
 @media(max-width:900px){
 
     .container{
-        flex-direction:column;
+        flex-direction: column;
+        min-height: 100vh;
     }
 
-    .left-side,
-    .right-side{
-        width:100%;
-        height:50%;
+    /* --- BAGIAN ATAS (BACKGROUND GAMBAR & LOGO) --- */
+    .left-side{
+        width: 100%;
+        height: 35vh; /* Beri ruang 35% layar untuk gambar gedung */
     }
 
     .logo-box{
-        flex-direction:column;
-        text-align:center;
+        flex-direction: column;
+        text-align: center;
+        padding: 15px 25px; /* Sesuaikan ukuran kotak putihnya */
     }
 
+    /* INI YANG BIKIN LOGO JADI NORMAL LAGI */
     .logo-box img{
-        width:70px;
+        width: 400px; /* Lebarkan dari yang sebelumnya cuma 70px */
     }
 
     .logo-box h1{
-        font-size:38px;
+        font-size: 28px;
     }
 
+    /* --- BAGIAN BAWAH (BACKGROUND ABU-ABU & FORM) --- */
+    .right-side{
+        width: 100%;
+        flex: 1; /* Penting! Memaksa warna abu-abu memanjang sampai paling bawah layar */
+        padding: 80px 20px 40px 20px; /* Tambah padding atas (80px) agar form tidak menabrak motto */
+        align-items: flex-start; /* Membuat form agak ke atas, tidak tenggelam di tengah */
+    }
+
+    /* Perbaiki Posisi Motto (Moving as one) agar tidak menabrak */
+    .motto-box {
+        top: 20px;
+        right: 20px;
+    }
+
+    .motto-box img {
+        width: 150px; /* Sedikit dikecilkan agar pas di HP */
+    }
+
+    /* --- KARTU LOGIN (FORM PUTIH) --- */
     .login-card{
-        width:90%;
-        padding:30px 20px;
+        width: 100%; 
+        max-width: 400px; /* Batas maksimal agar tidak terlalu melar/gepeng */
+        padding: 35px 20px;
+        margin: 0 auto; /* Pastikan selalu berada di tengah-tengah */
     }
 
     .login-card h2{
-        font-size:38px;
-        margin-bottom:30px;
+        font-size: 32px;
+        margin-bottom: 30px;
     }
 
-    .btn-login{
-        font-size:24px;
+    .btn-login, .btn-reg{
+        font-size: 20px;
+        padding: 12px;
     }
 }

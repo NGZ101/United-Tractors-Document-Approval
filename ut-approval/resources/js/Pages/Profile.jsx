@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Head, Link, useForm, usePage } from "@inertiajs/react";
-import "D:/06-Coding Naufal/United-Tractors-Document-Approval/ut-approval/resources/css/profile.css";
+import "/resources/css/profile.css";
 export default function Profile() {
     const { auth } = usePage().props;
     const user = auth?.user;
@@ -8,7 +8,7 @@ export default function Profile() {
         <div>
             <Head title="Alur" />
             <header className="navbar">
-                <Link className="back-btn" id="backButton" href="/">
+                <Link className="back-btn" id="backButton" href="/dashboard">
                     <img src="/assets/icon/return.png" alt="return" />
                 </Link>
                 <div className="logo">

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Head, Link, useForm, usePage } from "@inertiajs/react";
-import "D:/06-Coding Naufal/United-Tractors-Document-Approval/ut-approval/resources/css/submit.css";
+import "/resources/css/submit.css";
 
 export default function Submit() {
     const { data, setData, post, processing, errors } = useForm({
@@ -29,9 +29,9 @@ export default function Submit() {
 
     return (
         <div>
-            <Head title="Register" />
+            <Head title="Submit Document" />
             <header className="navbar">
-                <Link className="back-btn" id="backButton" href="/">
+                <Link className="back-btn" id="backButton" href="/dashboard">
                     <img src="/assets/icon/return.png" alt="return" />
                 </Link>
                 <div className="logo">
@@ -81,19 +81,6 @@ export default function Submit() {
 
                     <div className="input-group">
                         <input
-                            type="email" // Ubah jadi email agar validasi HTML jalan
-                            name="divisi_email"
-                            placeholder="Email Division Head"
-                            required
-                            value={data.divisi_email} // Sesuaikan nama
-                            onChange={
-                                (e) => setData("divisi_email", e.target.value) // Sesuaikan nama
-                            }
-                        />
-                    </div>
-
-                    <div className="input-group">
-                        <input
                             type="email" // Ubah jadi email
                             name="departemen_email"
                             placeholder="Email Departemen Head"
@@ -108,9 +95,22 @@ export default function Submit() {
 
                     <div className="input-group">
                         <input
+                            type="email" // Ubah jadi email agar validasi HTML jalan
+                            name="divisi_email"
+                            placeholder="Email Division Head"
+                            required
+                            value={data.divisi_email} // Sesuaikan nama
+                            onChange={
+                                (e) => setData("divisi_email", e.target.value) // Sesuaikan nama
+                            }
+                        />
+                    </div>
+
+                    <div className="input-group">
+                        <input
                             type="file"
                             name="file_dokumen"
-                            placeholder="Attach Dokumen"
+                            placeholder="Attach Dokumen (PDF)"
                             required
                             onChange={
                                 (e) =>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Head, Link, useForm, usePage } from '@inertiajs/react';
 import { router } from "@inertiajs/react";
-import 'D:/06-Coding Naufal/United-Tractors-Document-Approval/ut-approval/resources/css/login.css'; 
+import '/resources/css/login.css'; 
 
 export default function Login() {
     // 1. Menangkap session flash (error/success) dari Laravel

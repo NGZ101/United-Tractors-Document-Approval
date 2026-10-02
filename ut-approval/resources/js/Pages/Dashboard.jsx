@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Head, Link, useForm, usePage } from "@inertiajs/react";
 import { router } from "@inertiajs/react";
-import "D:/06-Coding Naufal/United-Tractors-Document-Approval/ut-approval/resources/css/dashboard.css";
+import "/resources/css/dashboard.css";
 export default function Dashboard({ title, documents }) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -53,9 +53,9 @@ export default function Dashboard({ title, documents }) {
 
     const PopupConfirm = () => {
         if (PopupConfig.type === "logout") {
-            router.post('/logout');
+            router.post("/logout");
         } else if (PopupConfig.type === "delete") {
-            router.post('/delete-account');
+            router.post("/delete-account");
         }
         setPopupConfig({
             isOpen: false,
@@ -68,21 +68,65 @@ export default function Dashboard({ title, documents }) {
             isOpen: false,
             type: null,
             message: "",
-        })
+        });
     };
+
+    const Timeline = (doc) => {
+        const TimelineSteps = [
+            {key: 'dept', label: 'Dept Head', approvedAt: doc.dept_head_approved_at, pendingStatus: 'pending_dept' },
+            {key: 'div', label: 'Div Head', approvedAt: doc.div_head_approved_at, pendingStatus: 'pending_div' },
+            {key: 'sop_pic', label: 'SOP PIC', approvedAt: doc.sop_pic_approved_at, pendingStatus: 'pending_sop_pic' },
+            {key: 'sop_head', label: 'SOP Head', approvedAt: doc.sop_head_approved_at, pendingStatus: 'pending_sop_head' },
+        ];
+
+        let isRejected = false;
+
+        return TimelineSteps.map(step => {
+            let status = '';
+            let date = '';
+            let dotColor = 'dot-black';
+
+            if (step.approvedAt) {
+                status = 'Approval';
+                date = `on ${step.approvedAt.substring(0, 10).replace(/-/g, "/")}`;
+                dotColor = 'dot-green';
+            }
+            else if (doc.status === 'rejected' && doc.rejected_by_role === step.key) {
+                status = 'Rejection';
+                date = `on ${doc.rejected_at ? doc.rejected_at.substring(0, 10).replace(/-/g, "/") : ''}`;
+                dotColor = 'dot-red';
+                isRejected = true;
+            }
+            else if (doc.status === step.pendingStatus) {
+                status = 'On Review';
+                date = '';
+                dotColor = 'dot-yellow';
+            }
+            else {
+                status = isRejected ? 'Canceled' : 'Pending';
+                date = '';
+                dotColor = 'dot-black';
+            }
+            return {label: step.label, status, date, dotColor};
+        })
+    }
 
     const { auth } = usePage().props;
     const user = auth?.user;
 
     return (
-        <div>
+        <div className="dashboard-container">
             <Head title="Dashboard" />
             {PopupConfig.isOpen && (
                 <div className="popup-container">
                     <h1>{PopupConfig.message}</h1>
                     <div className="popup-btns">
-                        <Link className="yes-btn" onClick={PopupConfirm}>YES</Link>
-                        <Link className="no-btn" onClick={PopupCancel}>NO</Link>
+                        <button className="yes-btn" onClick={PopupConfirm}>
+                            YES
+                        </button>
+                        <button className="no-btn" onClick={PopupCancel}>
+                            NO
+                        </button>
                     </div>
                 </div>
             )}
@@ -100,23 +144,23 @@ export default function Dashboard({ title, documents }) {
                     </button>
                     {isDropdownOpen && (
                         <div className="dropdown-profile">
-                            <Link href="/profile" className="dropdown-item">
+                            <button className="dropdown-item" onClick={() => window.location.href = '/profile'}>
                                 Profile
-                            </Link>
-                            <Link
+                            </button>
+                            <button
                                 href="/logout"
                                 className="dropdown-item"
                                 onClick={handleLogout}
                             >
                                 Logout
-                            </Link>
-                            <Link
+                            </button>
+                            <button
                                 href="/delete-account"
                                 className="dropdown-item"
                                 onClick={handleDelete}
                             >
                                 Delete Account
-                            </Link>
+                            </button>
                         </div>
                     )}
                 </div>
@@ -141,7 +185,7 @@ export default function Dashboard({ title, documents }) {
                     <tbody>
                         {!documents || documents.length === 0 ? (
                             <tr>
-                                <td>Belum ada dokumen yang disubmit.</td>
+                                <td></td>
                             </tr>
                         ) : (
                             documents.map((doc) => {
@@ -158,14 +202,14 @@ export default function Dashboard({ title, documents }) {
                                     statusText = "Rejected";
                                 }
 
-                                if (doc.status === "pending_div") {
-                                    statusColor = "#EAB514";
-                                    statusText = "On Review By Div Head";
-                                }
-
                                 if (doc.status === "pending_dept") {
                                     statusColor = "#EAB514";
                                     statusText = "On Review By Dept Head";
+                                }
+
+                                if (doc.status === "pending_div") {
+                                    statusColor = "#EAB514";
+                                    statusText = "On Review By Div Head";
                                 }
 
                                 if (doc.status === "pending_sop_pic") {
@@ -179,7 +223,7 @@ export default function Dashboard({ title, documents }) {
                                 }
 
                                 return (
-                                    <tr key={doc.id}>
+                                    <tr key={doc.id} className="table-items">
                                         <td>
                                             {doc.created_at
                                                 ? doc.created_at
@@ -189,7 +233,23 @@ export default function Dashboard({ title, documents }) {
                                         </td>
                                         <td>{doc.judul_dokumen}</td>
                                         <td style={{ color: statusColor }}>
-                                            {statusText}
+                                            <div className="hover-status">
+                                                <span style={{color: statusColor,}}>
+                                                    {statusText}
+                                                </span>
+                                                <div className="status-timeline">
+                                                    <div className="timeline-list">
+                                                        {Timeline(doc).map((item, idx) => (
+                                                            <div key={idx} className="timeline-item">
+                                                                <div className={`timeline-dot ${item.dotColor}`}></div>
+                                                                <span>
+                                                                    <strong>{item.label}:</strong> {item.status} {item.date}
+                                                                </span>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td>
                                         <td className="action-btns">
                                             <Link
@@ -204,9 +264,8 @@ export default function Dashboard({ title, documents }) {
                                             </Link>
                                             {doc.status === "approved" && (
                                                 <a
-                                                    target="_blank"
-                                                    rel="noreferrer"
                                                     className="download-btn"
+                                                    href={`/documents/${doc.id}/signature`}
                                                 >
                                                     <img
                                                         className="btn-icon"
@@ -217,9 +276,8 @@ export default function Dashboard({ title, documents }) {
                                             )}
                                             {doc.status === "rejected" && (
                                                 <a
-                                                    target="_blank"
-                                                    rel="noreferrer"
                                                     className="retry-btn"
+                                                    href={`/documents/${doc.id}/retry`}
                                                 >
                                                     <img
                                                         className="btn-icon"

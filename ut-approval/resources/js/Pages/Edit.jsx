@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Head, Link, useForm, usePage } from "@inertiajs/react";
 import { router } from "@inertiajs/react";
-import "D:/06-Coding Naufal/United-Tractors-Document-Approval/ut-approval/resources/css/edit.css";
+import "/resources/css/edit.css";
 export default function Edit() {
     const { auth } = usePage().props;
     const user = auth.user;

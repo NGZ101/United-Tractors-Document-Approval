@@ -21,6 +21,7 @@ class Document extends Model
         'sop_pic_email',
         'sop_head_email',
         'status',
+        'reject_reason',
         'approval_token',
         'dept_head_approved_at',
         'div_head_approved_at',
@@ -31,6 +32,6 @@ class Document extends Model
     ];
 
     public function user() {
-        return $this -> belongsTo(User::class);
+        return $this -> belongsTo(User::class, 'user_id', 'id');
     }
 }
